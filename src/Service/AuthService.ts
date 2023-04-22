@@ -15,6 +15,16 @@ class AuthService {
 
 
     } 
+    public async register(credentials: CredentialsModel): Promise<void>{
+       
+        const response = await axios.post<string>(appConfig.authUrl + "register/", credentials);
+       
+        const token = response.data;
+       
+        authStore.dispatch({ type: AuthActionType.Login, payload: token});
+
+
+    } 
 
     public Logout():void{
         authStore.dispatch({ type: AuthActionType.Logout });

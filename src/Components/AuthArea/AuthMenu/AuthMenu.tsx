@@ -4,6 +4,7 @@ import UserModel from "../../../Models/UserModel";
 import { authStore } from "../../../Redux/AuthState";
 import authService from "../../../Service/AuthService";
 import "./AuthMenu.css";
+import Register from "./Register/Register";
 
 
 function AuthMenu(): JSX.Element {
@@ -32,7 +33,7 @@ function AuthMenu(): JSX.Element {
 			{!user && 
             <>
             
-            <span>Hello Guest | </span>
+            <span><NavLink to={"/register"} >Register</NavLink> | </span>
             <NavLink to={"/login"}>Login</NavLink>
               </>}
               {user && 

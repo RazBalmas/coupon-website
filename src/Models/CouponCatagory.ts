@@ -1,0 +1,15 @@
+ enum Catagory {
+
+    FOOD,
+	ELECTRICITY,
+	RESTAURANT,
+	VACATION,
+	AUTOMOBILE,
+	HEALTH_CARE,
+	GARDENING,
+	HOME,
+	APLLIENCES
+
+}
+
+export default Catagory;

@@ -1,4 +1,5 @@
 import CompanyUserModel from "./CompanyUserModel";
+import CouponCatagory from "./CouponCatagory";
 import CustomerUserModel from "./CustomerUserModel";
 
 class CouponModel {
@@ -17,6 +18,8 @@ class CouponModel {
 	description : string;
 
 	image : string;
+
+	catagory : CouponCatagory;
 
     company : CompanyUserModel;
 

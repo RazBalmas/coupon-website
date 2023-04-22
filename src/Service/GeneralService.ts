@@ -3,7 +3,7 @@ import CouponModel from "../Models/CouponModel";
 import appConfig from "../Utils/AppConfig";
 import CompanyUserModel from "../Models/CompanyUserModel";
 
-class CouponService {
+class GeneralService {
     public async getAllCoupons() : Promise<CouponModel[]>{
         const response = await axios.get<CouponModel[]>(appConfig.generalServiceUrl + "allCoupons/");
         const coupons = response.data;
@@ -12,6 +12,6 @@ class CouponService {
 
     
 }
-const couponService = new CouponService();
+const generalService = new GeneralService();
 
-export default couponService;
+export default generalService;

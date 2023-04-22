@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CouponModel from "../../../Models/CouponModel";
 import "./ProductList.css";
-import couponService from "../../../Service/CouponService";
+import generalService from "../../../Service/GeneralService";
 import CouponCard from "../CouponCard/CouponCard";
 
 function ProductList(): JSX.Element {
@@ -11,7 +11,7 @@ function ProductList(): JSX.Element {
     useEffect(() => {
         async function getAllCoupons(){
             try{
-            const coupons = await couponService.getAllCoupons();
+            const coupons = await generalService.getAllCoupons();
             setCouponList(coupons);
 
         }

@@ -4,6 +4,7 @@ import Login from "../../AuthArea/Login/Login";
 import Home from "../../HomeArea/Home/Home";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import CouponDetails from "../../ProductArea/CouponDetails/CouponDetails";
+import Register from "../../AuthArea/AuthMenu/Register/Register";
 
 
 function Routing(): JSX.Element {
@@ -15,6 +16,7 @@ function Routing(): JSX.Element {
 
         <>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
