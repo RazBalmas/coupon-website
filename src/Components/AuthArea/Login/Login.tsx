@@ -31,9 +31,9 @@ function Login(): JSX.Element {
                 <legend>Client Type : </legend>
                     <select className="ClientType-Input" defaultValue="" size={1} required {...register("clientType")}>
                         <option disabled value="">Select Client Type</option>
-                        <option value={ClientType.CUSTOMER}>CUSTOMER</option>
-                        <option value={ClientType.COMPANY}>COMPANY</option>
-                        <option value={ClientType.ADMINISTRATOR}>ADMINISTRATOR</option>
+                        <option value={ClientType.CUSTOMER}>Customer</option>
+                        <option value={ClientType.COMPANY}>Company</option>
+                        <option value={ClientType.ADMIN}>Admin</option>
                     </select>
                 <br />
                 <br />

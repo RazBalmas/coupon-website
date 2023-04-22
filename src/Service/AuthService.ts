@@ -7,7 +7,7 @@ class AuthService {
 
     public async login(credentials: CredentialsModel): Promise<void>{
        
-        const response = await axios.post<string>(appConfig.loginUrl, credentials);
+        const response = await axios.post<string>(appConfig.authUrl + "login/", credentials);
        
         const token = response.data;
        

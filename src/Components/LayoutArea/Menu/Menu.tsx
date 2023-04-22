@@ -42,7 +42,7 @@ function Menu(): JSX.Element {
             <NavLink to="#">Company Link 2</NavLink>
             
             </>}
-            {clientType === ClientType.ADMINISTRATOR && <>
+            {clientType === ClientType.ADMIN && <>
             
             <NavLink to="#">Admin Link 1</NavLink>
             <br />

@@ -3,6 +3,7 @@ import About from "../../AboutArea/About/About";
 import Login from "../../AuthArea/Login/Login";
 import Home from "../../HomeArea/Home/Home";
 import PageNotFound from "../PageNotFound/PageNotFound";
+import CouponDetails from "../../ProductArea/CouponDetails/CouponDetails";
 
 
 function Routing(): JSX.Element {
@@ -12,11 +13,13 @@ function Routing(): JSX.Element {
         {
         
 
-        <><Route path="/login" element={<Login />} />
-        <Route path="/Home" element={<Home />} />
+        <>
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<PageNotFound />} />
+        <Route path="/coupon/couponDetails/:id" element={<CouponDetails/>}/>
         </>
         
         

@@ -4,16 +4,25 @@ class AppConfig {
 }
 
 class DevelopmentConfig {
-    public ProductsUrl = "http://localhost:3030/api/products/";
-    public ProductsImagesUrl = "http://localhost:3030/api/products/images/";
-    public loginUrl="http://8080/auth/login/";
+    public generalServiceUrl = "http://localhost:8080/api/general/";
+    public adminServiceUrl = "http://localhost:8080/api/admin/";
+    public companyServiceUrl = "http://localhost:8080/api/company/";
+    public customerServiceUrl = "http://localhost:8080/api/customer/";
+    public authUrl="http://localhost:8080/auth/";
+    
     
 }
 
+
 class ProductionConfig {
-    public ProductsUrl = "http://northwind.com/api/products/";
-    public ProductsImagesUrl = "http://northwind.com/api/products/images/";
-    public loginUrl="http://Coupon4U.com/auth/login/";
+    public generalServiceUrl = "http://localhost:8080/api/general/";
+    public adminServiceUrl = "http://localhost:8080/api/admin/";
+    public companyServiceUrl = "http://localhost:8080/api/company/";
+    public customerServiceUrl = "http://localhost:8080/api/customer/";
+    public authUrl="http://localhost:8080/auth/login/";
+    // public ProductsUrl = "http://northwind.com/api/products/";
+    // public ProductsImagesUrl = "http://northwind.com/api/products/images/";
+   
 
 }
 

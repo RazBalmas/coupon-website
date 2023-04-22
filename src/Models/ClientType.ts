@@ -2,7 +2,7 @@ enum ClientType {
 	
     CUSTOMER = "CUSTOMER",
     COMPANY = "COMPANY",
-    ADMINISTRATOR = "ADMINISTRATOR"
+    ADMIN = "ADMIN"
 }
 
 export default ClientType;

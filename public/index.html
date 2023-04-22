@@ -19,7 +19,6 @@
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
-
       Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
@@ -32,12 +31,97 @@
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
-
       You can add webfonts, meta tags, or analytics to this file.
       The build step will place the bundled scripts into the <body> tag.
-
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
 </html>
+
+<!-- <!DOCTYPE html>
+<html lang="en" onload="setLoggedInMode(false)">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body onload="setLoggedInMode(false)">
+    <fieldset>
+      <legend>Mode</legend>
+      <div id="mode"></div>
+    </fieldset>
+    <fieldset>
+      <legend>register</legend>
+      <input id="reg_email" type="email" placeholder="e-mail" />
+      <input id="reg_password" type="password" placeholder="password" />
+      <label for="reg_role">role</label>
+      <select id="reg_role">
+        <option value="ADMIN">ADMIN</option>
+        <option value="COMPANY">COMPANY</option>
+        <option value="CUSTOMER">CUSTOMER</option>
+      </select>
+      <br />
+      <button
+        onclick="register(reg_email.value, reg_password.value, reg_role.value)"
+      >
+        register
+
+      </button >
+      <br />
+    </fieldset>
+
+    <fieldset>
+      <legend>login</legend>
+      <input id="log_email" type="email" placeholder="e-mail" />
+      <input id="log_password" type="password" placeholder="password" />
+      <label for="role">role</label>
+      <select id="log_role">
+        <option value="ADMIN">ADMIN</option>
+        <option value="COMPANY">COMPANY</option>
+        <option value="CUSTOMER">CUSTOMER</option>
+      </select>
+      <br />
+      <button
+        onclick="login(log_email.value, log_password.value, log_role.value)"
+      >
+        login
+      </button>
+      <br />
+      <button onclick="logout()">logout</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Use General API</legend>
+      <button onclick="callGreet()">call greet</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Use Admin API</legend>
+      <input type="number" id="companyId" placeholder="company id" />
+      <button onclick="deleteCompany(companyId.value)">delete company</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Use Company API</legend>
+      <input type="number" id="couponId" placeholder="coupon id" />
+      <button onclick="updateCoupon(couponId.value)">update coupon</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Use Customer API</legend>
+      <button onclick="getCustomerDetails()">get customer details</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>response</legend>
+      <div id="resp"></div>
+    </fieldset>
+
+    <script src="models.js"></script>
+    <script src="utilFunctions.js"></script>
+    <script src="auth.js"></script>
+    <script src="api-calls.js"></script>
+  </body>
+</html> -->
