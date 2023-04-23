@@ -6,11 +6,11 @@ import appConfig from "../Utils/AppConfig";
 class AuthService {
 
     public async login(credentials: CredentialsModel): Promise<void>{
-       
+        
+        console.log(credentials);
         const response = await axios.post<string>(appConfig.authUrl + "login/", credentials);
        
         const token = response.data;
-       
         authStore.dispatch({ type: AuthActionType.Login, payload: token});
 
 

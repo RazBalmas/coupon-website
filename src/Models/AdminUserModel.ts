@@ -1,8 +1,9 @@
+import ClientType from "./ClientType";
 import UserModel from "./UserModel";
 
 class AdminUserModel extends UserModel{
 	
-    public constructor (clientType: ClientTypes, id: number, email: string, password:string){
+    public constructor (clientType: ClientType, id: number, email: string, password:string){
         super (clientType, id, email,password);
     
     }

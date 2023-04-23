@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import UserModel from "../../../Models/UserModel";
 import { authStore } from "../../../Redux/AuthState";
 import authService from "../../../Service/AuthService";
 import "./AuthMenu.css";
-import Register from "./Register/Register";
+import ClientType from "../../../Models/ClientType";
+
 
 
 function AuthMenu(): JSX.Element {
@@ -20,13 +21,16 @@ function AuthMenu(): JSX.Element {
 
 
     }, [])
-
+    
     function Logout():void{
         authService.Logout();
         alert("Bye Bye =)");
+        const navigate = useNavigate();
+        navigate("/Home");
 
 
     }
+
 
     return (
         <div className="AuthMenu">

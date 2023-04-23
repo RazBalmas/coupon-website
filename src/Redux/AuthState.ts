@@ -7,10 +7,11 @@ import CustomerUserModel from "../Models/CustomerUserModel";
 import UserModel from "../Models/UserModel";
 
 
+
 // 1. Application Sate
 export class AuthState{
-    public user: UserModel = null;
-    public token: string = null;
+    public user: UserModel;
+    public token: string;
 
     public constructor() {
         this.token = sessionStorage.getItem("token");
@@ -19,7 +20,6 @@ export class AuthState{
         }
     }
 }
-
 
 // 2. Action Type
 export enum AuthActionType{
@@ -50,7 +50,7 @@ export function authReducer(currentState = new AuthState() , action: AuthAction)
         
         newState.token = action.payload;
         newState.user = extractUser(newState.token);
-        sessionStorage.setItem("token" , newState.token)
+        sessionStorage.setItem("token" , newState.token);
         break;
         
         
@@ -67,19 +67,19 @@ export function authReducer(currentState = new AuthState() , action: AuthAction)
 }
 
 function extractUser(token: string): UserModel {
-
+    
     let user: UserModel;
     const container: any = jwtDecode(token);
-
+    
     if(container.ClientType=== ClientType.CUSTOMER){
-        user = new CustomerUserModel(container.ClientType, container.id, container.password, container.email, container.firstName, container.lastName);
+        user = new CustomerUserModel(container.clientType, container.id, container.email, container.password,container.firstName, container.lastName);
     }
     else if(container.ClientType=== ClientType.COMPANY){
-       user = new CompanyUserModel(container.ClientType, container.id, container.password, container.email, container.name);
-        
+       user = new CompanyUserModel(container.clientType, container.id, container.password, container.email, container.name);
+       
     }
     else {
-       user = new AdminUserModel(container.ClientType, container.id, container.password, container.email);
+       user = new AdminUserModel(container.clientType, container.id, container.password, container.email);
         
     }
 

@@ -15,9 +15,10 @@ function Login(): JSX.Element {
 
    async function send(credentials: CredentialsModel) {
         try {
+           
             await authService.login(credentials);
             alert("Welcome!")
-            navigate("/home")
+            navigate("/Home")
 
         } catch (err: any) {
             alert(err.message)
