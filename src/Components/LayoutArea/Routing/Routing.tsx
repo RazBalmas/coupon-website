@@ -33,9 +33,13 @@ import CustomerExistsById from "../../AdminArea/CustomerExistsById/CustomerExist
 import CustomerExistsByEmail from "../../AdminArea/CustomerExistsByEmail/CustomerExistsByEmail";
 import AddCustomer from "../../AdminArea/AddCustomer/AddCustomer";
 import DeleteCustomer from "../../AdminArea/DeleteCustomer/DeleteCustomer";
-import AllCustomers from "../../AdminAre/AllCustomers/AllCustomers";
 import CustomerById from "../../AdminArea/CustomerById/CustomerById";
 import CustomerByEmail from "../../AdminArea/CustomerByEmail/CustomerByEmail";
+
+import CustomersMenu from "../../AdminArea/CustomersMenu/CustomersMenu";
+import CouponsMenu from "../../AdminArea/CouponsMenu/CouponsMenu";
+import AllCustomers from "../../AdminArea/AllCustomers/AllCustomers";
+import CompaniesMenu from "../Menu/CompaniesMenu/CompaniesMenu";
 
 
 function Routing(): JSX.Element {
@@ -73,12 +77,14 @@ function Routing(): JSX.Element {
         <Route path="/api/Customer/uploadImage" element={<UploadImage/>} />
 
         {/* Admin Methods Routs */}
+        <Route path="/api/admin/companiesMenu" element={<CompaniesMenu />} />
+        <Route path="/api/admin/customersMenu" element={<CustomersMenu />} />
+        <Route path="/api/admin/couponsMenu" element={<CouponsMenu />} />
         <Route path="/api/admin/companyExistsById" element={<CompanyExistsById />} />
         <Route path="/api/admin/companyExistsByEmail" element={<CompanyExistsByEmail />} />
         <Route path="/api/admin/addCompany" element={<AddCompany />} />
         <Route path="/api/admin/updateCompany" element={<UpdateCompany />} />
         <Route path="/api/admin/deleteCompany" element={<DeleteCompany />} />
-        <Route path="/api/admin/getAllCompany" element={<GetAllCompany />} />
         <Route path="/api/admin/getAllCompany" element={<GetAllCompany />} />
         <Route path="/api/admin/getCompanyById" element={<GetCompanyById />} />
         <Route path="/api/admin/getCompanyByEmail" element={<GetCompanyByEmail />} />
@@ -89,9 +95,8 @@ function Routing(): JSX.Element {
         <Route path="/api/admin/CouponById" element={<CouponById />} />
         <Route path="/api/admin/CouponByTitle" element={<CouponByTitle />} />
         <Route path="/api/admin/allCoupons" element={<AllCoupons />} />
-        <Route path="/api/admin/allCoupons" element={<AllCoupons />} />
         <Route path="/api/admin/customerExistsById" element={<CustomerExistsById />} />
-        <Route path="/api/admin/customerExistsById" element={<CustomerExistsByEmail />} />
+        <Route path="/api/admin/customerExistsByEmail" element={<CustomerExistsByEmail />} />
         <Route path="/api/admin/addCustomer" element={<AddCustomer />} />
         <Route path="/api/admin/updateCustomer" element={<UpdateCustomer />} />
         <Route path="/api/admin/deleteCustomer" element={<DeleteCustomer />} />

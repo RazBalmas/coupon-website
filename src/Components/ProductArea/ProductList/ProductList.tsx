@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CouponModel from "../../../Models/CouponModel";
 import "./ProductList.css";
 import generalService from "../../../Service/GeneralService";
-import CouponCard from "../CouponCard/CouponCard";
+import CouponCard from "../../CardsArea/CouponCard/CouponCard";
 
 function ProductList(): JSX.Element {
     

@@ -28,6 +28,7 @@ class AuthService {
 
     public Logout():void{
         authStore.dispatch({ type: AuthActionType.Logout });
+        sessionStorage.clear();
     }
 }
 

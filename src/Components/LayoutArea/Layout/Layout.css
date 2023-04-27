@@ -19,9 +19,7 @@
     grid-column: span 6;
     
   }
- 
-  
   .Layout, .Layout > * {
-    border: 1px solid black;
+    border: 1px solid white;
   }
   

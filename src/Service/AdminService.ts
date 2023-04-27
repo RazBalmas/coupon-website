@@ -32,7 +32,7 @@ class AdminService {
     }
     public async addCompany(company : CompanyUserModel) : Promise<number>{
 
-        const response = await axios.post<CompanyUserModel>(appConfig.adminServiceUrl + "companyExistsByEmail/" + company);
+        const response = await axios.post<CompanyUserModel>(appConfig.adminServiceUrl + "addCompany/" + company);
         const id = response.data;
         return id.id;
     }
@@ -69,6 +69,11 @@ class AdminService {
     public async addCoupon(coupon : CouponModel){
         
         await axios.post<void>(appConfig.adminServiceUrl + "addCoupon/" + coupon);
+        
+    }
+    public async addCustomer(customer : CustomerUserModel){
+        
+        await axios.post<void>(appConfig.adminServiceUrl + "addCustomer/" + customer);
         
     }
     
