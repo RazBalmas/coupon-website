@@ -13,9 +13,9 @@ function CompanyExistsByEmail(): JSX.Element {
     
         async function existsByEmail(){
             try{
-                console.log(register);
+           
                 const answer = await adminService.companyExistsByEmail(register);
-                console.log(register);
+
                 setExists(answer);
             }
             catch (error : any){

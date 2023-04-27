@@ -21,12 +21,8 @@ function Menu(): JSX.Element {
     });
     return unsubscribe;
     }, []);
-    
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
 
-    const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
     return (
         
         <div className="Menu">
@@ -47,7 +43,7 @@ function Menu(): JSX.Element {
             <>
            
             
-            <NavLink to={"/api/company/updateCompany"}>Update Company</NavLink>
+            <NavLink to={"/api/company/UpdateCompany"}>Update Company</NavLink>
             <br />
             <NavLink to={"/api/company/addCoupon"}>Add Coupon</NavLink>
             <br />

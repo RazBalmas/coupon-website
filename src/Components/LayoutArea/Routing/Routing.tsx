@@ -3,9 +3,9 @@ import About from "../../AboutArea/About/About";
 import Login from "../../AuthArea/Login/Login";
 import Home from "../../HomeArea/Home/Home";
 import PageNotFound from "../PageNotFound/PageNotFound";
-import CouponDetails from "../../ProductArea/CouponDetails/CouponDetails";
+
 import Register from "../../AuthArea/AuthMenu/Register/Register";
-import UpdateCompany from "../../CompanyArea/UpdateCompany/UpdateCompany";
+
 import AddCoupon from "../../CompanyArea/AddCoupon/AddCoupon";
 import UpdateCoupon from "../../CompanyArea/UpdateCoupon/UpdateCoupon";
 import DeleteCoupon from "../../CompanyArea/DeleteCoupon/DeleteCoupon";
@@ -36,10 +36,13 @@ import DeleteCustomer from "../../AdminArea/DeleteCustomer/DeleteCustomer";
 import CustomerById from "../../AdminArea/CustomerById/CustomerById";
 import CustomerByEmail from "../../AdminArea/CustomerByEmail/CustomerByEmail";
 
-import CustomersMenu from "../../AdminArea/CustomersMenu/CustomersMenu";
-import CouponsMenu from "../../AdminArea/CouponsMenu/CouponsMenu";
-import AllCustomers from "../../AdminArea/AllCustomers/AllCustomers";
+
+import CouponsMenu from "../Menu/CouponsMenu/CouponsMenu";
+
 import CompaniesMenu from "../Menu/CompaniesMenu/CompaniesMenu";
+import AllCustomers from "../../AdminArea/AllCustomers/AllCustomers";
+import CustomersMenu from "../Menu/CustomersMenu/CustomersMenu";
+import UpdateCompany from "../../CompanyArea/UpdateCompany/UpdateCompany";
 
 
 function Routing(): JSX.Element {
@@ -59,7 +62,7 @@ function Routing(): JSX.Element {
         <Route path="*" element={<PageNotFound />} />
         
         {/* Company Methods Routs */}
-        <Route path="/api/company/updateCompany" element={<UpdateCompany/>} />
+        <Route path="/api/company/UpdateCompany" element={<UpdateCompany/>} />
         <Route path="/api/company/addCoupon" element={<AddCoupon/>} />
         <Route path="/api/company/updateCoupon" element={<UpdateCoupon/>} />
         <Route path="/api/company/deleteCoupon" element={<DeleteCoupon/>} />

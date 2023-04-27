@@ -12,7 +12,7 @@ function Login(): JSX.Element {
    const {register, handleSubmit} = useForm <CredentialsModel>();
    
    const navigate = useNavigate();
-
+  
    async function send(credentials: CredentialsModel) {
         try {
            

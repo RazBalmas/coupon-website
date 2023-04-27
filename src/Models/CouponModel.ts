@@ -21,7 +21,7 @@ class CouponModel {
 
 	catagory : CouponCatagory;
 
-    company : CompanyUserModel;
+    company ?: CompanyUserModel;
 
     customers ?: CustomerUserModel;
 }

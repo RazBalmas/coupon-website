@@ -2,7 +2,6 @@ import axios from "axios";
 import CouponModel from "../Models/CouponModel";
 import appConfig from "../Utils/AppConfig";
 import CompanyUserModel from "../Models/CompanyUserModel";
-import CustomerUserModel from "../Models/CustomerUserModel";
 
 class CompanyService {
     

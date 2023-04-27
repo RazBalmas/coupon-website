@@ -88,7 +88,7 @@ class AdminService {
         
     }
     
-    public async CouponsByCompanyId(id : number) : Promise<CouponModel[]>{
+    public async couponsByCompanyId(id : number) : Promise<CouponModel[]>{
     
         const response = await axios.get<CouponModel[]>(appConfig.adminServiceUrl + "getCompanyByEmail/" + id);
         const companyCoupons = response.data;
