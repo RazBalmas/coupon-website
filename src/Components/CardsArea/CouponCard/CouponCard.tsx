@@ -19,12 +19,12 @@ function CouponCard(props : CouponModelProps): JSX.Element {
             Amount : ${props.coupon.amount}
             Company name : {props.coupon.company.name} <br />
 
-            {/* <NavLink className={"links"} to={"/updateCoupon"} >
+            <NavLink className={"links"} to={"/updateCoupon"} state={props}>
                 Update
             </NavLink>
             <NavLink className={"links"} to={"/deleteCoupon"}>
-                Update
-            </NavLink> */}
+                delete
+            </NavLink>
             </div>
         </div>
     );

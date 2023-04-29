@@ -47,8 +47,6 @@ function Menu(): JSX.Element {
             <br />
             <NavLink to={"/api/company/addCoupon"}>Add Coupon</NavLink>
             <br />
-            <NavLink to={"/api/company/updateCoupon"}>Update Coupon</NavLink>
-            <br />
             <NavLink to={"/api/company/deleteCoupon"}>Delete Coupon</NavLink>
             <br />
             <NavLink to={"/api/company/allMyCoupons"}>My Coupons</NavLink>
@@ -64,7 +62,7 @@ function Menu(): JSX.Element {
             <br />
             <NavLink to={"/api/company/addCoupon"}>Add Coupon</NavLink>
             <br />
-            <NavLink to={"/api/company/updateCoupon"}>Update Coupon</NavLink>
+            <NavLink to={"/api/Customer/allCoupons"}>All Coupon</NavLink>
             <br />
             <NavLink to={"/api/company/deleteCoupon"}>Delete Coupon</NavLink>
             <br />

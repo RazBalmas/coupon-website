@@ -65,21 +65,21 @@ export function authReducer(currentState = new AuthState() , action: AuthAction)
 
     return newState;
 }
-
+        
 function extractUser(token: string): UserModel {
     
     let user: UserModel;
     const container: any = jwtDecode(token);
     
     if(container.ClientType=== ClientType.CUSTOMER){
-        user = new CustomerUserModel(container.clientType, container.id, container.email, container.password,container.firstName, container.lastName);
+        user = new CustomerUserModel(container.clientType, container.sub, container.email, container.password,container.firstName, container.lastName);
     }
     else if(container.ClientType=== ClientType.COMPANY){
-       user = new CompanyUserModel(container.clientType, container.id, container.password, container.email, container.name);
+       user = new CompanyUserModel(container.clientType, container.sub, container.password, container.email, container.name);
        
     }
     else {
-       user = new AdminUserModel(container.clientType, container.id, container.password, container.email);
+       user = new AdminUserModel(container.clientType, container.sub, container.password, container.email);
         
     }
 

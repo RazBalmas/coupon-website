@@ -4,9 +4,11 @@ import { AuthState } from "../../../Redux/AuthState";
 import "./UpdateCoupon.css";
 import companyService from "../../../Service/CompanyService";
 import Catagory from "../../../Models/CouponCatagory";
+import customerService from "../../../Service/CustomerService";
+import CompanyUserModel from "../../../Models/CompanyUserModel";
+import { useState } from "react";
 
-function UpdateCoupon(): JSX.Element {
-    
+function UpdateCoupon(currentCoupon : CouponModel): JSX.Element {
     
     let authState = new AuthState();
     const userDetails = {
@@ -14,6 +16,9 @@ function UpdateCoupon(): JSX.Element {
     }
    
     const {register, handleSubmit} = useForm <CouponModel>();
+    
+    
+
 
     async function send(credentials: CouponModel) {
          try {
@@ -29,14 +34,14 @@ function UpdateCoupon(): JSX.Element {
     
     return (
         <div className="UpdateCoupon">
-			<form onSubmit={handleSubmit(send)}>
+        			<form onSubmit={handleSubmit(send)}>
 
 <legend>Title : </legend>
-<input type="text"  {...register("title")} />
+<input type="text"  {...register("title")} placeholder={currentCoupon.title}/>
 <br />
 
 <legend>Category Type : </legend>
-    <select className="Catagory-Input" defaultValue="" size={1} required {...register("catagory")}>
+    <select className="Catagory-Input" defaultValue={currentCoupon.catagory} size={1} required {...register("catagory")}>
         <option disabled value="">Select Category :</option>
         <option value={Catagory.APLLIENCES}>Appliances</option>
         <option value={ Catagory.AUTOMOBILE}>Automobile</option>
@@ -51,25 +56,25 @@ function UpdateCoupon(): JSX.Element {
 <br />
 <br />
 <legend>Price per unit : </legend>
-<input type="number" required {...register("price")}/>
+<input type="number" required {...register("price")} defaultValue={currentCoupon.price}/>
 <br />
 <br />
 
 <legend>Amount of coupons : </legend>
-<input type="number" required {...register("amount")} />
+<input type="number" required {...register("amount")} defaultValue={currentCoupon.amount}/>
 <br />
 <br />
 <legend>Start Date : </legend>
-<input type="date" required {...register("startDate")} />
+<input type="date" required {...register("startDate")} defaultValue={currentCoupon.startDate.getDate()}/>
 <br />
 <br />
 <legend>End Date : </legend>
-<input type="date" required {...register("endDate")} />
+<input type="date" required {...register("endDate")} defaultValue={currentCoupon.endDate.getDate()} />
 <br />
 <br />
 
 <legend>Description : </legend>
-<input type="text" {...register("description")}/>
+<input type="text" {...register("description")} placeholder= {currentCoupon.description}/>
 
 <br />
 <br />
@@ -81,14 +86,13 @@ function UpdateCoupon(): JSX.Element {
 <br />
 <br />
 
-<input type="number" {...register("id")}  value={0} disabled/>
+<input type="number" {...register("id")}  value={currentCoupon.id} disabled/>
 
 
 <br />
 <button>submit</button>
 </form>
 </div>
-     
     );
 }
 

@@ -1,20 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CompanyUserModel from "../../../Models/CompanyUserModel";
 import "./GetCompanyById.css";
 import adminService from "../../../Service/AdminService";
-
-
-
 import CompanyCard from "../../CardsArea/CompanyCard/CompanyCard";
+import { useParams } from "react-router-dom";
+
 
 function GetCompanyById(): JSX.Element {
      
-    let register : number;
+    
     const [company, setCompany] = useState<CompanyUserModel | undefined>(null);
+    let register : number;
     
 
     async function companyById(){
         try{
+          console.log(register)
             const answer = await adminService.getCompanyById(register);
             setCompany(answer);
         }
@@ -30,7 +31,7 @@ function GetCompanyById(): JSX.Element {
             <legend>Id :</legend>
             <br />
             <input type="number" value={register}/>
-            <button type="submit" onClick={companyById} >Check</button>
+            <button type="submit" onSubmit={companyById} >Check</button>
               
             {company !== null ? (
               <div>

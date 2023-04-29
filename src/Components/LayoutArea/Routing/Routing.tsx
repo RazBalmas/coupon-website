@@ -64,7 +64,7 @@ function Routing(): JSX.Element {
         {/* Company Methods Routs */}
         <Route path="/api/company/UpdateCompany" element={<UpdateCompany/>} />
         <Route path="/api/company/addCoupon" element={<AddCoupon/>} />
-        <Route path="/api/company/updateCoupon" element={<UpdateCoupon/>} />
+       
         <Route path="/api/company/deleteCoupon" element={<DeleteCoupon/>} />
         <Route path="/api/company/allMyCoupons" element={<AllCompanyCoupons/>} />
         <Route path="/api/company/uploadImage" element={<UploadImage/>} />
@@ -92,7 +92,6 @@ function Routing(): JSX.Element {
         <Route path="/api/admin/getCompanyById" element={<GetCompanyById />} />
         <Route path="/api/admin/getCompanyByEmail" element={<GetCompanyByEmail />} />
         <Route path="/api/admin/addCoupon" element={<AddCoupon />} />
-        <Route path="/api/admin/updateCoupon" element={<UpdateCoupon />} />
         <Route path="/api/admin/deleteCoupon" element={<DeleteCoupon />} />
         <Route path="/api/admin/CouponsByCompanyId" element={<CouponsByCompanyId />} />
         <Route path="/api/admin/CouponById" element={<CouponById />} />

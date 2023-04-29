@@ -3,6 +3,8 @@ import CouponModel from "../Models/CouponModel";
 import appConfig from "../Utils/AppConfig";
 import CompanyUserModel from "../Models/CompanyUserModel";
 import CustomerUserModel from "../Models/CustomerUserModel";
+import companyService from "./CompanyService";
+import { CompanyActionType, companyStore, fetchCompanyAction } from "../Redux/CompanyState";
 
 class AdminService {
     public async getAllCoupons() : Promise<CouponModel[]>{
@@ -55,8 +57,10 @@ class AdminService {
  
     public async getCompanyById(id : number) : Promise<CompanyUserModel>{
     
+        console.log(id);
         const response = await axios.get<CompanyUserModel>(appConfig.adminServiceUrl + "getCompanyById/" + id);
         const company = response.data;
+        companyStore.dispatch(fetchCompanyAction(company));
         return company;
     }
     public async getCompanyByEmail(email : string) : Promise<CompanyUserModel>{
@@ -73,8 +77,10 @@ class AdminService {
     }
     public async addCustomer(customer : CustomerUserModel){
         
-        await axios.post<void>(appConfig.adminServiceUrl + "addCustomer/" + customer);
-        
+        const response = await axios.post<void>(appConfig.adminServiceUrl + "addCustomer/" + customer);
+        const addedCustomer = response.data;
+        // companyStore.dispatch(fetchCompanyAction(addedCustomer));
+        return addedCustomer;
     }
     
     public async updateCoupon(coupon : CouponModel){
