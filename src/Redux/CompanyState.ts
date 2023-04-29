@@ -57,8 +57,11 @@ export function companyReducer (currentState : CompanyState = new CompanyState()
             newState.user = action.payload;
             break;
             
-            case CompanyActionType.addCompany :
+        case CompanyActionType.addCompany :
                 newState.user = action.payload.push(action.payload);
+                break;
+        case CompanyActionType.UpdateCompany :
+                newState.user = action.payload.put(action.payload);
                 break;
     }
     return newState;
