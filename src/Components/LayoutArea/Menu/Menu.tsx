@@ -79,7 +79,7 @@ function Menu(): JSX.Element {
                 <div className="AdminDropdownMenu">
                 <NavLink to={"/api/admin/companyExistsById"}>Company exists by Id</NavLink>
             <br />
-            <NavLink to={"/api/admin/companyExistsByEmail"}>Company exists by Id</NavLink>
+            <NavLink to={"/api/admin/companyExistsByEmail"}>Company exists by Email</NavLink>
             <br />
             <NavLink to={"/api/admin/addCompany"}>Add a Company</NavLink>
             <br />
@@ -91,7 +91,7 @@ function Menu(): JSX.Element {
             <br />
             <NavLink to={"/api/admin/getCompanyById"}>Get Company by Id</NavLink>
             <br />
-            <NavLink to={"/api/admin/getCompanyByEmail"}>Get Company by Id</NavLink>
+            <NavLink to={"/api/admin/getCompanyByEmail"}>Get Company by Email</NavLink>
                 </div>
               </div>
               <div className="AdminDropdownItem">

@@ -2,10 +2,12 @@ import { NavLink, useParams } from "react-router-dom";
 
 import "./CompanyCard.css";
 import CompanyUserModel from "../../../Models/CompanyUserModel";
+import adminService from "../../../Service/AdminService";
 
 interface CompanyUserProps{
     company : CompanyUserModel;
 }
+
 
 
 function CompanyCard(props : CompanyUserProps): JSX.Element {

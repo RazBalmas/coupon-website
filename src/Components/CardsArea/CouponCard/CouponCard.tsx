@@ -10,18 +10,19 @@ function CouponCard(props : CouponModelProps): JSX.Element {
     return (
         <div className="CouponCard">
             <div>
+            Company name : {props.coupon.company.name} <br />
             {props.coupon.catagory} <br />
 			Title : {props.coupon.title} <br />
 			Description : {props.coupon.description} <br />
-			StartDate : {props.coupon.startDate.toDateString()} <br />
-			EndDate : {props.coupon.endDate.toDateString()} <br />
-            Price : ${props.coupon.price}
-            Amount : ${props.coupon.amount}
-            Company name : {props.coupon.company.name} <br />
+			StartDate : {props.coupon.startDate.toString()} <br />
+			EndDate : {props.coupon.endDate.toString()} <br />
+            Price : ${props.coupon.price}<br />
+            Amount : ${props.coupon.amount}<br />
 
             <NavLink className={"links"} to={"/updateCoupon"} state={props}>
                 Update
-            </NavLink>
+            </NavLink>    
+            
             <NavLink className={"links"} to={"/deleteCoupon"}>
                 delete
             </NavLink>

@@ -8,6 +8,7 @@ class Interceptors {
 
             if(authStore.getState().token){
                 requestObject.headers.Authorization = "Bearer " + authStore.getState().token;
+               
             }
 
 

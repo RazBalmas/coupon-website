@@ -15,7 +15,7 @@ function AddCompany(): JSX.Element {
 
    async function send(credentials: CompanyUserModel) {
         try {
-           
+            console.log(credentials);
             await adminService.addCompany(credentials);
             alert("Success!")
             

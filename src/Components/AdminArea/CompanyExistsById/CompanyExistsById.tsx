@@ -5,21 +5,20 @@ import adminService from "../../../Service/AdminService";
 
 function CompanyExistsById(): JSX.Element {
      
-    const [register, handleSubmit] = useState<number>();
+    const [register, setRegister] = useState<number>();
     const [exists, setExists] = useState<boolean>(false);
-    
+        
+    async function handleCheckClick () {
+        try {
+          const answer = await adminService.companyExistsById(register);
+          setExists(answer);
+        } catch (error: any) {
+          console.log(error);
+          alert("No Company by specified Id");
+        }
+      };
 
     
-        async function existsById(){
-            try{
-                const answer = await adminService.companyExistsById(register);
-                setExists(answer);
-            }
-            catch (error : any){
-                console.log(error);
-                alert("Failed to retrieve data from server")
-            }
-        }
 
     
     
@@ -28,8 +27,11 @@ function CompanyExistsById(): JSX.Element {
 			
             <legend>Id</legend>
           
-                <input type="number" value={register}/>
-                <button type="submit" onClick={existsById}>Check</button>
+                <input type="number"
+                value={register}
+                 onChange={(e) => setRegister(Number(e.target.value))}
+                />
+                <button type="submit" onClick={handleCheckClick}>Check</button>
          
 
                 <span>{exists}</span>

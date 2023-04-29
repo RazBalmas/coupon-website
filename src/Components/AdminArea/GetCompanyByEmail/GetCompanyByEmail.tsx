@@ -1,53 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CompanyUserModel from "../../../Models/CompanyUserModel";
 import "./GetCompanyByEmail.css";
 import adminService from "../../../Service/AdminService";
-
-
-
 import CompanyCard from "../../CardsArea/CompanyCard/CompanyCard";
+import { useParams } from "react-router-dom";
+
 
 function GetCompanyByEmail(): JSX.Element {
      
-    let register : string;
-    const [company, setCompany] = useState<CompanyUserModel | undefined>(null);
     
-
-    async function companyByEmail(){
-        try{
-            const answer = await adminService.getCompanyByEmail(register);
-            setCompany(answer);
-        }
-        catch (error : any){
-            console.log(error);
-            alert("Failed to retrieve data from server")
-        }
-    }
-
+    const [company, setCompany] = useState<CompanyUserModel | undefined>(undefined);
+    const [register, setRegister] = useState<string>("");
     
-    return (
-        <div className="GetCompanyByEmail">
-            <legend>Email :</legend>
-            <br />
-            <input type="text" value={register}/>
-            <button type="submit" onClick={companyByEmail} >Check</button>
-              
-            {company !== null ? (
-              <div>
-                {
-                <CompanyCard key={company.id} company={company}/>
-                }
-                {/* {coupon.title !== undefined && (
-                  <p>Coupon Title: {coupon.title}</p>
-                )} */}
+    
+    const handleCheckClick = async () => {
+      try {
+        console.log(register);
+        const answer = await adminService.getCompanyByEmail(register);
+        setCompany(answer);
+      } catch (error: any) {
+        console.log(error);
+        alert("No Company by specified Email");
+      }
+    };
 
-              </div>
-            ) : (
-              <p>No coupon data to display</p>
-            )}
-        </div>
-            
-    );
+return (
+  <div className="GetCompanyByEmail">
+
+      <legend>Email :</legend>
+      <br />
+      <input
+        type="text"
+        value={register}
+        onChange={(e) => setRegister(String(e.target.value))}
+      />
+       <button onClick={handleCheckClick}>Check</button>
+
+  
+    {company !== undefined ? (
+      <div>
+        <CompanyCard key={company.id} company={company} />
+      </div>
+    ) : (
+      <p>No company data to display</p>
+    )}
+  </div>
+);
 }
 
 export default GetCompanyByEmail;

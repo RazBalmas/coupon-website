@@ -2,8 +2,10 @@ import { createStore } from "redux";
 import CompanyUserModel from "../Models/CompanyUserModel";
 import UserModel from "../Models/UserModel";
 import { AuthState, authStore } from "./AuthState";
+
+
 export class CompanyState {
-    public user : UserModel = new AuthState().user;
+    public users: CompanyUserModel[] = [];
 }
 
 
@@ -12,7 +14,7 @@ export enum CompanyActionType {
     UpdateCompany,
     getCompany,
     deleteCompany,
-    getAllCompanies
+    companyExists
 }
 
 export interface CompanyAction {
@@ -35,11 +37,11 @@ export function addCompanyAction(
     return {type : CompanyActionType.addCompany , payload : company };
 }
 export function deleteCompanyAction(
-    company : CompanyUserModel
+    id : number
 
 ) : CompanyAction {
 
-    return {type : CompanyActionType.deleteCompany , payload : company };
+    return {type : CompanyActionType.deleteCompany , payload : id };
 }
 export function updateCompanyAction(
     company : CompanyUserModel
@@ -48,21 +50,42 @@ export function updateCompanyAction(
 
     return {type : CompanyActionType.UpdateCompany , payload : company };
 }
+export function findCompanyExists(
+    id : number
 
-export function companyReducer (currentState : CompanyState = new CompanyState() , action : CompanyAction) {
-    const newState = {...currentState};
+) : CompanyAction {
 
+    return {type : CompanyActionType.companyExists , payload : Boolean };
+}
+
+export const setAuthHeader = (token : string) => {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    };
+    return { headers };
+  };
+
+export function companyReducer (currentState : CompanyState = new CompanyState(), action : CompanyAction) : CompanyState {
+    const newState = {... currentState};
     switch(action.type) {
         case CompanyActionType.getCompany :
-            newState.user = action.payload;
+            newState.users  = (action.payload);
             break;
             
         case CompanyActionType.addCompany :
-                newState.user = action.payload.push(action.payload);
+                newState.users.push(action.payload);
                 break;
         case CompanyActionType.UpdateCompany :
-                newState.user = action.payload.put(action.payload);
+                const indexToUpdate = newState.users.findIndex(p => p.id === action.payload);
+                if (indexToUpdate >= 0) newState.users[indexToUpdate] = action.payload;
                 break;
+                case CompanyActionType.deleteCompany :
+                    const indexToDelete = newState.users = action.payload.delete()
+                    if (indexToDelete >= 0) newState.users.splice(indexToDelete, 1);
+                break;
+            
+            
     }
     return newState;
 }

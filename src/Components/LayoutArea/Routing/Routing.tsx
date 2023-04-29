@@ -80,7 +80,7 @@ function Routing(): JSX.Element {
         <Route path="/api/Customer/uploadImage" element={<UploadImage/>} />
 
         {/* Admin Methods Routs */}
-        <Route path="/api/admin/companiesMenu" element={<CompaniesMenu />} />
+        
         <Route path="/api/admin/customersMenu" element={<CustomersMenu />} />
         <Route path="/api/admin/couponsMenu" element={<CouponsMenu />} />
         <Route path="/api/admin/companyExistsById" element={<CompanyExistsById />} />

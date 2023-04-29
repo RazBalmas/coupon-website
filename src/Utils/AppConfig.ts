@@ -1,6 +1,6 @@
 class AppConfig {
 
-    public loginUrl="http://8080/auth/login/";
+    // public loginUrl="http://8080/auth/login/";
 }
 
 class DevelopmentConfig {

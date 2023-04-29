@@ -4,9 +4,20 @@ import appConfig from "../Utils/AppConfig";
 import CompanyUserModel from "../Models/CompanyUserModel";
 import CustomerUserModel from "../Models/CustomerUserModel";
 import companyService from "./CompanyService";
-import { CompanyActionType, companyStore, fetchCompanyAction } from "../Redux/CompanyState";
+import { CompanyActionType, addCompanyAction, companyStore, fetchCompanyAction } from "../Redux/CompanyState";
+import { authStore } from "../Redux/AuthState";
+import interceptors from "../Utils/Interceptors";
+
 
 class AdminService {
+    
+    public token: string;
+    constructor () {
+        this.token = sessionStorage.getItem("token");
+
+    }
+
+
     public async getAllCoupons() : Promise<CouponModel[]>{
         const response = await axios.get<CouponModel[]>(appConfig.adminServiceUrl + "allCoupons/");
         const coupons = response.data;
@@ -14,34 +25,39 @@ class AdminService {
     }
 
     public async getOneCoupon(id : number) : Promise<CouponModel>{
-
-        const response = await axios.get<CouponModel>(appConfig.adminServiceUrl + "getOneCoupon/" + id);
+        console.log(id);
+        const response = await axios.get<CouponModel>(appConfig.adminServiceUrl + "CouponById?coupon_id=" + id);
         const coupon = response.data;
         return coupon;
     }
-  
+    
     public async companyExistsById(id : number) : Promise<boolean>{
-
-        const response = await axios.get<boolean>(appConfig.adminServiceUrl + "companyExistsById/" + id);
+        
+        const response = await axios.get<boolean>(appConfig.adminServiceUrl + "companyExistsById?companyId=" + id);
         const exists = response.data;
+        console.log(exists);
         return exists;
     }
     public async companyExistsByEmail(email : string) : Promise<boolean>{
-
-        const response = await axios.get<boolean>(appConfig.adminServiceUrl + "companyExistsByEmail/" + email);
+        console.log(email);
+        const response = await axios.get<boolean>(appConfig.adminServiceUrl + "companyExistsByEmail?email=" + email);
         const exists = response.data;
+        console.log(exists);
         return exists;
     }
-    public async addCompany(company : CompanyUserModel) : Promise<number>{
-
-        const response = await axios.post<CompanyUserModel>(appConfig.adminServiceUrl + "addCompany/" + company);
-        const id = response.data;
-        return id.id;
+    public async addCompany(company : CompanyUserModel) : Promise<CompanyUserModel>{
+   
+        const response = await axios.post<CompanyUserModel>(appConfig.adminServiceUrl + "addCompany" , company);
+        const updatedCompany = response.data;
+        companyStore.dispatch({type: CompanyActionType.addCompany, payload: updatedCompany});
+        return updatedCompany;
     }
     public async updateCompany(company : CompanyUserModel){
         
-        await axios.put<void>(appConfig.adminServiceUrl + "updateCompany/" + company);
-        
+        const response =  await axios.put<CompanyUserModel>(appConfig.adminServiceUrl + "updateCompany" +company.id , company);
+        const updatedCompany = response.data;
+        companyStore.dispatch({type: CompanyActionType.UpdateCompany, payload: updatedCompany});
+        return updatedCompany;
     }
     public async deleteCompany(id : number) {
         
@@ -51,21 +67,21 @@ class AdminService {
     public async getAllCompany() : Promise<CompanyUserModel[]>{
     
         const response = await axios.get<CompanyUserModel[]>(appConfig.adminServiceUrl + "getAllCompany/");
-        const id = response.data;
-        return id;
+        const allCompany = response.data;
+        return allCompany;
     }
  
     public async getCompanyById(id : number) : Promise<CompanyUserModel>{
     
         console.log(id);
-        const response = await axios.get<CompanyUserModel>(appConfig.adminServiceUrl + "getCompanyById/" + id);
+        const response = await axios.get<CompanyUserModel>(appConfig.adminServiceUrl + "getCompanyById?id=" + id);
         const company = response.data;
         companyStore.dispatch(fetchCompanyAction(company));
         return company;
     }
     public async getCompanyByEmail(email : string) : Promise<CompanyUserModel>{
     
-        const response = await axios.get<CompanyUserModel>(appConfig.adminServiceUrl + "getCompanyByEmail/" + email);
+        const response = await axios.get<CompanyUserModel>(appConfig.adminServiceUrl + "getCompanyByEmail?email=" + email);
         const company = response.data;
         return company;
     }
@@ -79,7 +95,6 @@ class AdminService {
         
         const response = await axios.post<void>(appConfig.adminServiceUrl + "addCustomer/" + customer);
         const addedCustomer = response.data;
-        // companyStore.dispatch(fetchCompanyAction(addedCustomer));
         return addedCustomer;
     }
     
@@ -89,27 +104,29 @@ class AdminService {
         
     }
     public async deleteCoupon(id : number){
-        
-        await axios.delete<void>(appConfig.adminServiceUrl + "deleteCoupon/" + id);
-        
+        try{
+            await axios.delete<void>(appConfig.adminServiceUrl + "deleteCoupon?coupon_id=" + id);
+            alert("Coupon was removed sucssefully!")
+        }
+        catch{alert("Failed..")}
     }
     
     public async couponsByCompanyId(id : number) : Promise<CouponModel[]>{
     
-        const response = await axios.get<CouponModel[]>(appConfig.adminServiceUrl + "getCompanyByEmail/" + id);
+        const response = await axios.get<CouponModel[]>(appConfig.adminServiceUrl + "CouponsByCompanyId?company_id=" + id);
         const companyCoupons = response.data;
         return companyCoupons;
     }
     
     public async CouponById(id : number) : Promise<CouponModel>{
     
-        const response = await axios.get<CouponModel>(appConfig.adminServiceUrl + "CouponById/" + id);
+        const response = await axios.get<CouponModel>(appConfig.adminServiceUrl + "CouponById?coupon_id=" + id);
         const coupon = response.data;
         return coupon;
     }
     public async CouponByTitle(title : string) : Promise<CouponModel>{
     
-        const response = await axios.get<CouponModel>(appConfig.adminServiceUrl + "CouponByTitle/" + title);
+        const response = await axios.get<CouponModel>(appConfig.adminServiceUrl + "CouponByTitle?title=" + title);
         const coupon = response.data;
         return coupon;
     }

@@ -13,8 +13,8 @@ function GetAllCompany(): JSX.Element {
     useEffect(() => {
         async function getAllCompanies(){
             try{
-            const customers = await adminService.getAllCompany();
-            setCompanyList(customers);
+            const companies = await adminService.getAllCompany();
+            setCompanyList(companies);
         }
         catch (error : any){
             console.log(error);

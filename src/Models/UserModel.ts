@@ -1,6 +1,7 @@
 import ClientType from "./ClientType";
 
 class UserModel {
+    [x: string]: any;
     public id?: number;
     public password?: string;
     public email?: string;

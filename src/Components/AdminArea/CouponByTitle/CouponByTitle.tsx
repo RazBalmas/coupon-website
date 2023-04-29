@@ -9,41 +9,43 @@ import CouponCard from "../../CardsArea/CouponCard/CouponCard";
 
 function CouponByTitle(): JSX.Element {
      
-    let register : string;
-    const [coupon, setCoupon] = useState<CouponModel | undefined>(null);
-    
-
-    async function couponByTitle(){
-        try{
-            const answer = await adminService.CouponByTitle(register);
-            setCoupon(answer);
-        }
-        catch (error : any){
-            console.log(error);
-            alert("Failed to retrieve data from server")
-        }
+  const [coupon, setCoupon] = useState<CouponModel | undefined>(undefined);
+  const [register, setRegister] = useState<string>("");
+  
+  
+  const handleCheckClick = async () => {
+    try {
+      console.log(register);
+      const answer = await adminService.CouponByTitle(register);
+      setCoupon(answer);
+    } catch (error: any) {
+      console.log(error);
+      alert("No Coupon by specified Id");
     }
+  };
+
 
     
     return (
         <div className="CouponByTitle">
-            <legend>Title</legend>
-            <input type="text" value={register}/>
-            <button type="submit" onClick={couponByTitle} >Check</button>
-              
-            {coupon !== null ? (
-              <div>
-                {
-                <CouponCard key={coupon.id} coupon={coupon}/>
-                }
-                {/* {coupon.title !== undefined && (
-                  <p>Coupon Title: {coupon.title}</p>
-                )} */}
+              <legend>Title :</legend>
+      <br />
+      <input
+        type="text"
+        value={register}
+        onChange={(e) => setRegister(String(e.target.value))}
+      />
+       <button onClick={handleCheckClick}>Check</button>
 
-              </div>
-            ) : (
-              <p>No coupon data to display</p>
-            )}
+  
+    {coupon !== undefined ? (
+      <div>
+        <CouponCard key={coupon.id} coupon={coupon} />
+      </div>
+    ) : (
+      <p>No coupon data to display</p>
+    )}
+          
         </div>
             
     );

@@ -10,41 +10,46 @@ import CouponModel from "../../../Models/CouponModel";
 
 function CouponsByCompanyId(): JSX.Element {
      
-    let register : number;
-    const [coupons, setCoupons] = useState<CouponModel []| undefined>(null);
+     
+    const [companyCoupons, setCompanyCoupons] = useState<CouponModel[] | undefined>(undefined);
+    const [register, setRegister] = useState<number>(0);
     
-
-    async function couponsByCompanyId(){
-        try{
-            const answer = await adminService.couponsByCompanyId(register);
-            setCoupons(answer);
-        }
-        catch (error : any){
-            console.log(error);
-            alert("Failed to retrieve data from server")
-        }
-    }
+    
+    const handleCheckClick = async () => {
+      try {
+        console.log(register);
+        const answer = await adminService.couponsByCompanyId(register);
+        setCompanyCoupons(answer);
+      } catch (error: any) {
+        console.log(error);
+        alert("No Coupon by specified Company Id");
+      }
+    };
+  
+  
 
     
     return (
         <div className="CouponsByCompanyId">
-            <legend>Company Id</legend>
-            <input type="number" value={register}/>
-            <button type="submit" onClick={couponsByCompanyId} >Check</button>
+                <legend>Company Id :</legend>
+      <br />
+      <input
+        type="number"
+        value={register}
+        onChange={(e) => setRegister(Number(e.target.value))}
+      />
+       <button onClick={handleCheckClick}>Check</button>
 
-
-             {coupons !== null ? (
-              <div>
-                 <hr /> 
-                {
-                coupons.map((p)=>(
-                <CouponCard key={p.id} coupon={p}/>) )
-                }
-        </div>
-            ) : (
-                <p>No coupon data to display</p>
-                )  
-            }
+    {companyCoupons !== undefined ? (
+        <div>
+          {companyCoupons.map((p)=>(
+                   <CouponCard key={p.id} coupon={p}/>
+               ) )}
+      </div>
+    ) : (
+      <p>No coupon data to display</p>
+    )}
+          
                 </div>
                 
                 );
