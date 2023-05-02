@@ -12,6 +12,7 @@ function CompanyExistsById(): JSX.Element {
         try {
           const answer = await adminService.companyExistsById(register);
           setExists(answer);
+          alert("Yes!");
         } catch (error: any) {
           console.log(error);
           alert("No Company by specified Id");

@@ -1,23 +1,24 @@
+import adminService from "../../../Service/AdminService";
 import companyService from "../../../Service/CompanyService";
 import "./DeleteCoupon.css";
+import { useEffect, useState } from "react";
 
 function DeleteCoupon(): JSX.Element {
-    let register : number;
-    
+    const [register, handleSubmit] = useState <number>(0);
+   
+ 
 
-    
-        async function deleteCoupon(){
-            try{
-           
-                await companyService.deleteCoupon(register);
-                alert("Company was deleted successfully!")
-
-            }
-            catch (error : any){
-                console.log(error);
-                alert("Failed to retrieve data from server")
-            }
-        }
+    async function send() {
+         try {
+            
+             await adminService.deleteCoupon(register);
+            
+             
+ 
+         } catch (err: any) {
+             alert("Failed!")
+         }
+    } 
 
     
     return (
@@ -25,11 +26,11 @@ function DeleteCoupon(): JSX.Element {
 			
             <div className="DeleteCoupon">
 			
-            <legend>Coupon number :</legend>
-          
-                <input type="number" value={register}/>
-                <button type="submit" onClick={deleteCoupon}>Check</button>
-        
+            <input type="number" onChange={(e) => {
+            const id = parseInt(e.target.value);
+            handleSubmit(id);
+            }}/>
+      <button type="submit" onClick={() => send()}>Submit</button>
        
 
         </div>

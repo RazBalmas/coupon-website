@@ -19,6 +19,8 @@ class CouponModel {
 
 	image : string;
 
+	imageFile ?:  File;
+
 	catagory : CouponCatagory;
 
     company ?: CompanyUserModel;

@@ -16,7 +16,7 @@ function AddCustomer(): JSX.Element {
 
     async function send(credentials: CustomerUserModel) {
          try {
-            
+             console.log(credentials);
              await adminService.addCustomer(credentials);
              alert("Success!")
              

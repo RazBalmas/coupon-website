@@ -11,13 +11,13 @@ import UpdateCoupon from "../../CompanyArea/UpdateCoupon/UpdateCoupon";
 import DeleteCoupon from "../../CompanyArea/DeleteCoupon/DeleteCoupon";
 import AllCompanyCoupons from "../../CompanyArea/AllCompanyCoupons/AllCompanyCoupons";
 import UploadImage from "../../CompanyArea/UploadImage/UploadImage";
-import UpdateCustomer from "../../CustomerArea/UpdateCustomer/UpdateCustomer";
+import UpdateCustomer from "../../AdminArea/UpdateCustomer/UpdateCustomer";
 import GetCustomerCoupons from "../../CustomerArea/GetCustomerCoupons/GetCustomerCoupons";
-import AddPurches from "../../CustomerArea/AddPurches/AddPurches";
-import DeletePurches from "../../CustomerArea/DeletePurches/DeletePurches";
+import AddPurches from "../../AdminArea/AddPurches/AddPurches";
+import DeletePurches from "../../AdminArea/DeletePurches/DeletePurches";
 import FindCouponByCatagory from "../../CustomerArea/FindCouponByCatagory/FindCouponByCatagory";
 import FindCouponById from "../../CustomerArea/FindCouponById/FindCouponById";
-import AllCoupons from "../../CustomerArea/AllCoupons/AllCoupons";
+
 import Menu from "../Menu/Menu";
 import CompanyExistsById from "../../AdminArea/CompanyExistsById/CompanyExistsById";
 import CompanyExistsByEmail from "../../AdminArea/CompanyExistsByEmail/CompanyExistsByEmail";
@@ -43,6 +43,15 @@ import CompaniesMenu from "../Menu/CompaniesMenu/CompaniesMenu";
 import AllCustomers from "../../AdminArea/AllCustomers/AllCustomers";
 import CustomersMenu from "../Menu/CustomersMenu/CustomersMenu";
 import UpdateCompany from "../../CompanyArea/UpdateCompany/UpdateCompany";
+import CouponModel from "../../../Models/CouponModel";
+import UpdateCustomerByCustomer from "../../CustomerArea/UpdateCustomerByCustomer/UpdateCustomerByCustomer";
+import AddPurchesByCustomer from "../../CustomerArea/AddPurchesByCustomer/AddPurchesByCustomer";
+import DeletePurchesByCustomer from "../../CustomerArea/DeletePurchesByCustomer/DeletePurchesByCustomer";
+import AllCoupons from "../../AdminArea/AllCoupons/AllCoupons";
+import AllCouponsByCustomer from "../../CustomerArea/AllCouponsByCustomer/AllCouponsByCustomer";
+import AllMyCouponsByCustomer from "../../CustomerArea/AllMyCouponsByCustomer/AllMyCouponsByCustomer";
+
+
 
 
 function Routing(): JSX.Element {
@@ -64,23 +73,28 @@ function Routing(): JSX.Element {
         {/* Company Methods Routs */}
         <Route path="/api/company/UpdateCompany" element={<UpdateCompany/>} />
         <Route path="/api/company/addCoupon" element={<AddCoupon/>} />
+        <Route path="/api/admin/updateCoupon" element={<UpdateCoupon />} />
        
         <Route path="/api/company/deleteCoupon" element={<DeleteCoupon/>} />
         <Route path="/api/company/allMyCoupons" element={<AllCompanyCoupons/>} />
         <Route path="/api/company/uploadImage" element={<UploadImage/>} />
        
         {/* Customer Methods Routs */}
-        <Route path="/api/Customer/updateCustomer" element={<UpdateCustomer/>} />
+  
+        <Route path="/api/Customer/AllMyCouponsByCustomer" element={<AllMyCouponsByCustomer/>} />
+        <Route path="/api/Customer/updateCustomerByCustomer" element={<UpdateCustomerByCustomer/>} />
         <Route path="/api/Customer/customerCoupons" element={<GetCustomerCoupons/>} />
-        <Route path="/api/Customer/addPurches" element={<AddPurches/>} />
-        <Route path="/api/Customer/deletePurches" element={<DeletePurches/>} />
+        <Route path="/api/Customer/addPurchesByCustomer" element={<AddPurchesByCustomer/>} />
+        <Route path="/api/Customer/deletePurchesByCustomer" element={<DeletePurchesByCustomer/>} />
         <Route path="/api/Customer/findCouponById" element={<FindCouponById/>} />
         <Route path="/api/Customer/findCouponByCatagory" element={<FindCouponByCatagory/>} />
-        <Route path="/api/Customer/allCoupons" element={<AllCoupons/>} />
-        <Route path="/api/Customer/uploadImage" element={<UploadImage/>} />
+        <Route path="/api/Customer/allCouponsByCustomer" element={<AllCouponsByCustomer/>} />
+
+       
 
         {/* Admin Methods Routs */}
         
+        <Route path="/api/Customer/allCoupons" element={<AllCoupons/>} />
         <Route path="/api/admin/customersMenu" element={<CustomersMenu />} />
         <Route path="/api/admin/couponsMenu" element={<CouponsMenu />} />
         <Route path="/api/admin/companyExistsById" element={<CompanyExistsById />} />

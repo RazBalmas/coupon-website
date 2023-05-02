@@ -6,84 +6,73 @@ import { AuthState, authStore } from "./AuthState";
 import CouponModel from "../Models/CouponModel";
 
 
-export class CouponState {
-    public coupons: CouponModel[] = [];
+
+// 1. products state - the data we need at global application level
+export class ProductsState {
+    public Coupons: CouponModel[] = [];
+}
+
+// 2. Action Types - list of actions - enum
+export enum ProductActionType {
+    FetchProducts,
+    AddProduct,
+    UpdateProduct,
+    DeleteProduct
+}
+
+// 3. Action - an interface describing a single command
+export interface ProductsAction {
+    type: ProductActionType; // action type
+    payload: any; // action data
+}
+
+// 4. action creators - functions to create action objects
+export function fetchProductAction(products: CouponModel[]): ProductsAction {
+    return { type: ProductActionType.FetchProducts, payload: products };
+}
+
+export function addProductAction(product: CouponModel): ProductsAction {
+    return { type: ProductActionType.AddProduct, payload: product };
+}
+
+export function updateProductAction(product: CouponModel): ProductsAction {
+    return { type: ProductActionType.UpdateProduct, payload: product };
+}
+
+export function deleteProductAction(id: number): ProductsAction {
+    return { type: ProductActionType.DeleteProduct, payload: id };
 }
 
 
-export enum CouponActionType {
-    addCoupon,
-    UpdateCoupon,
-    getCoupon,
-    deleteCoupon,
-  
-}
-
-export interface CouponAction {
-    type : CouponActionType;
-    payload :any;
-}
-
-export function fetchCouponAction(
-    coupon : CouponModel
-
-) : CouponAction {
-
-    return {type : CouponActionType.getCoupon , payload : coupon };
-}
-export function addCouponAction(
-    coupon : CouponModel
-
-) : CouponAction {
-
-    return {type : CouponActionType.addCoupon , payload : coupon };
-}
-export function deleteCouponAction(
-    id : number
-
-) : CouponAction {
-
-    return {type : CouponActionType.deleteCoupon , payload : id };
-}
-export function updateCouponAction(
-    coupon : CouponModel
-
-) : CouponAction {
-
-    return {type : CouponActionType.UpdateCoupon , payload : coupon };
-}
 
 
-export const setAuthHeader = (token : string) => {
-    const headers = {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    };
-    return { headers };
-  };
+// 5. reducer - a single function performing any of the above actions
 
-export function couponReducer (currentState : CouponState = new CouponState(), action : CouponAction) : CouponState {
-    const newState = {... currentState};
-    switch(action.type) {
-        case CouponActionType.getCoupon :
-            newState.coupons  = (action.payload);
+export function productReducer(currentState: ProductsState = new ProductsState(), action: ProductsAction): ProductsState {
+    const newState = { ...currentState }; // duplicate current state
+
+    switch (action.type) {
+        case ProductActionType.FetchProducts: // here payload is all products
+            newState.Coupons = action.payload;
             break;
-            
-        case CouponActionType.addCoupon :
-                newState.coupons.push(action.payload);
-                break;
-        case CouponActionType.UpdateCoupon :
-                const indexToUpdate = newState.coupons.findIndex(p => p.id === action.payload);
-                if (indexToUpdate >= 0) newState.coupons[indexToUpdate] = action.payload;
-                break;
-                case CouponActionType.deleteCoupon :
-                    const indexToDelete = newState.coupons = action.payload.delete()
-                    if (indexToDelete >= 0) newState.coupons.splice(indexToDelete, 1);
-                break;
-            
-            
+        case ProductActionType.AddProduct: // here payload is a single product to add
+            newState.Coupons.push(action.payload);
+            break;
+        case ProductActionType.UpdateProduct: // here payload is a single product to update
+            const indexToUpdate = newState.Coupons.findIndex(p => p.id === action.payload.id);
+            if (indexToUpdate >= 0) newState.Coupons[indexToUpdate] = action.payload;
+            break;
+        case ProductActionType.DeleteProduct: // here payload is an id of product to delete
+            const indexToDelete = newState.Coupons.findIndex(p => p.id === action.payload);
+            if (indexToDelete >= 0) newState.Coupons.splice(indexToDelete, 1);
+            break;
     }
+
     return newState;
 }
 
-export const companyStore = createStore(couponReducer);
+// 6 Products Store object to manage all products state
+
+export const productsStore = createStore(productReducer);
+
+

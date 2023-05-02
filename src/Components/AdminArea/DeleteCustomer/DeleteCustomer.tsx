@@ -5,32 +5,38 @@ import { log } from "console";
 
 function DeleteCustomer(): JSX.Element {
      
-    let register : number;
+    const [register, handleSubmit] = useState <number>(0);
+   
+ 
+
+    async function send() {
+         try {
+            
+             await adminService.deleteCompany(register);
+             alert("Success!")
+             
+ 
+         } catch (err: any) {
+             alert("Failed!")
+         }
+    } 
     
-
+   
     
-        async function deleteCustomer(){
-            try{
-           
-                await adminService.deleteCustomer(register);
-                alert("Company was deleted successfully!")
-
-            }
-            catch (error : any){
-                console.log(error);
-                alert("Failed to retrieve data from server")
-            }
-        }
-
     
     
     return (
         <div className="DeleteCustomer">
-			
-            <legend>Id :</legend>
-          
-                <input type="number" value={register}/>
-                <button type="submit" onClick={deleteCustomer}>Check</button>
+			      <legend>Id :</legend>
+      <br />
+      <input
+        type="number"
+        value={register}
+        onChange={(e) => handleSubmit(Number(e.target.value))}
+      />
+       <button onClick={send}>Check</button>
+        
+        
         
         </div>
     );

@@ -4,7 +4,7 @@ import appConfig from "../Utils/AppConfig";
 import CompanyUserModel from "../Models/CompanyUserModel";
 import CustomerUserModel from "../Models/CustomerUserModel";
 import companyService from "./CompanyService";
-import { CompanyActionType, addCompanyAction, companyStore, fetchCompanyAction } from "../Redux/CompanyState";
+import { CompanyActionType, addCompanyAction, companyStore, fetchCompanyAction, postUploadImage, setAuthHeader } from "../Redux/CompanyState";
 import { authStore } from "../Redux/AuthState";
 import interceptors from "../Utils/Interceptors";
 
@@ -14,13 +14,15 @@ class AdminService {
     public token: string;
     constructor () {
         this.token = sessionStorage.getItem("token");
-
+        
     }
 
 
     public async getAllCoupons() : Promise<CouponModel[]>{
-        const response = await axios.get<CouponModel[]>(appConfig.adminServiceUrl + "allCoupons/");
+        const response = await axios.get<CouponModel[]>(appConfig.adminServiceUrl + "allCoupons");
         const coupons = response.data;
+        companyStore.dispatch({type: CompanyActionType.getCompany, payload: coupons});
+
         return coupons;
     }
 
@@ -54,14 +56,14 @@ class AdminService {
     }
     public async updateCompany(company : CompanyUserModel){
         
-        const response =  await axios.put<CompanyUserModel>(appConfig.adminServiceUrl + "updateCompany" +company.id , company);
+        const response =  await axios.put<CompanyUserModel>(appConfig.adminServiceUrl + "updateCompany", company);
         const updatedCompany = response.data;
         companyStore.dispatch({type: CompanyActionType.UpdateCompany, payload: updatedCompany});
         return updatedCompany;
     }
     public async deleteCompany(id : number) {
         
-        await axios.delete<void>(appConfig.adminServiceUrl + "deleteCompany/" + id);
+        await axios.delete<void>(appConfig.adminServiceUrl + "deleteCompany?companyId=" + id);
     }
     
     public async getAllCompany() : Promise<CompanyUserModel[]>{
@@ -88,12 +90,12 @@ class AdminService {
     
     public async addCoupon(coupon : CouponModel){
         
-        await axios.post<void>(appConfig.adminServiceUrl + "addCoupon/" + coupon);
+        await axios.post<void>(appConfig.adminServiceUrl + "addCoupon" , coupon);
         
     }
     public async addCustomer(customer : CustomerUserModel){
         
-        const response = await axios.post<void>(appConfig.adminServiceUrl + "addCustomer/" + customer);
+        const response = await axios.post<void>(appConfig.adminServiceUrl + "addCustomer/" , customer);
         const addedCustomer = response.data;
         return addedCustomer;
     }
@@ -139,14 +141,14 @@ class AdminService {
     
     public async customerExistsById(id : number) : Promise<boolean>{
     
-        const response = await axios.get<boolean>(appConfig.adminServiceUrl + "customerExistsById/" + id);
+        const response = await axios.get<boolean>(appConfig.adminServiceUrl + "customerExistsById?Id=" + id);
         const exists = response.data;
         return exists;
     }
     
     public async customerExistsByEmail(email : string) : Promise<boolean>{
     
-        const response = await axios.get<boolean>(appConfig.adminServiceUrl + "customerExistsByEmail/" + email);
+        const response = await axios.get<boolean>(appConfig.adminServiceUrl + "customerExistsByEmail?email=" + email);
         const exists = response.data;
         return exists;
     }
@@ -166,34 +168,52 @@ class AdminService {
     
     public async customerById(id : number) : Promise<CustomerUserModel>{
     
-        const response = await axios.get<CustomerUserModel>(appConfig.adminServiceUrl + "customerById/" + id);
+        const response = await axios.get<CustomerUserModel>(appConfig.adminServiceUrl + "customerById?customerID=" + id);
         const customer = response.data;
         return customer;
     }
     
     public async customerByEmail(email : string) : Promise<CustomerUserModel>{
         
-        const response = await axios.get<CustomerUserModel>(appConfig.adminServiceUrl + "customerByEmail/" + email);
+        const response = await axios.get<CustomerUserModel>(appConfig.adminServiceUrl + "customerByEmail?email=" + email);
         const customer = response.data;
         return customer;
     }
     
     public async customerCoupons(id : number) : Promise<CouponModel[]>{
         
-        const response = await axios.get<CouponModel[]>(appConfig.adminServiceUrl + "customerByEmail/" + id);
+        const response = await axios.get<CouponModel[]>(appConfig.adminServiceUrl + "customerCoupons?customerID=" + id);
         const customer = response.data;
         return customer;
     }
     
     public async addPurches(customerId : number , couponId: number){
         
-        await axios.post<void>(appConfig.adminServiceUrl + "addPurches/" + customerId + "/" + couponId);
+        await axios.post<void>(appConfig.adminServiceUrl + "addPurches?customerID=" + customerId + "&couponID=" + couponId);
         
     }
     public async deletePurches(customerId : number , couponId: number){
         
-        await axios.delete<void>(appConfig.adminServiceUrl + "deletePurches/" + customerId + "/" + couponId);
+        await axios.delete<void>(appConfig.adminServiceUrl + "deletePurches?customerID=" + customerId + "&couponID=" + couponId);
         
+    }
+
+    public async uploadImage(file : File) : Promise<string>{
+    
+        companyStore.dispatch(postUploadImage(file));
+        const formData = new FormData();
+        formData.append('file', file);
+        const response = await axios.post<string>(appConfig.adminServiceUrl + "uploadImage", formData);
+        const imageName = response.data;
+        return imageName;
+    }
+
+    public async getImage(fileName : string) : Promise<File>{
+    
+       
+        const response = await axios.get<File>(appConfig.adminServiceUrl + "/getImage/{}" + fileName);
+        const image = response.data;
+        return image;
     }
     
     

@@ -3,6 +3,7 @@ import "./AllCoupons.css";
 import CouponModel from "../../../Models/CouponModel";
 import customerService from "../../../Service/CustomerService";
 import CouponCard from "../../CardsArea/CouponCard/CouponCard";
+import adminService from "../../../Service/AdminService";
 
 function AllCoupons(): JSX.Element {
 
@@ -11,8 +12,8 @@ function AllCoupons(): JSX.Element {
     useEffect(() => {
         async function getAllCoupon(){
             try{
-            const customers = await customerService.allCoupons();
-            setCouponsList(customers);
+            const coupons = await adminService.allCoupons();
+            setCouponsList(coupons);
         }
         catch (error : any){
             console.log(error);

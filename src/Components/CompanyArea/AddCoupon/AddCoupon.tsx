@@ -10,26 +10,59 @@ import adminService from "../../../Service/AdminService";
 import CouponModel from "../../../Models/CouponModel";
 import Catagory from "../../../Models/CouponCatagory";
 import companyService from "../../../Service/CompanyService";
+import UploadImage from "../UploadImage/UploadImage";
+import { useEffect, useState } from "react";
 
 function AddCoupon(): JSX.Element {
-    const {register, handleSubmit} = useForm <CouponModel>();
+    const {register, handleSubmit} = useForm <CouponModel>(undefined);
+    
    
  
 
-   async function send(credentials: CouponModel) {
-        try {
-           
-            await companyService.addCoupon(credentials);
-            alert("Success!")
+    async function send(credentials: CouponModel) {
+         try {
+             console.log(credentials);
+             
+             if(imageName) {
+                credentials.image = imageName;
+             }
+             if(companyId) {
+               const company = await adminService.getCompanyById(companyId);
+               credentials.company = company;
+               await adminService.addCoupon(credentials);
+               alert("Success!")
             
 
-        } catch (err: any) {
-            alert("Failed!")
-        }
-   } 
+            }
+        }   
+ 
+          catch (err: any) {
+             alert("Failed!")
+         }
+    } 
+
+    
+        const [imageName, setImageName] = useState <string>("");
+        const [companyId, setCompanyId] = useState <number>(0);
+
+        async function addImage(file : File) : Promise<string> {
+             try {
+                console.log(file.name);
+                 const imageName = await adminService.uploadImage(file);
+                 alert("Image was uploaded!")
+                 
+     
+                 setImageName(imageName);
+             } catch (err: any) {
+                 alert("Failed!")
+                 return "";
+             }
+        } 
+    
+
     return (
         <div className="AddCoupon">
-			<form onSubmit={handleSubmit(send)}>
+			<form onSubmit={handleSubmit(send)} encType="multipart/form-data">
 
                 <legend>Title : </legend>
                 <input type="text"  {...register("title")} />
@@ -58,35 +91,41 @@ function AddCoupon(): JSX.Element {
                 <legend>Amount of coupons : </legend>
                 <input type="number" required {...register("amount")} />
                 <br />
-                <br />
                 <legend>Start Date : </legend>
                 <input type="date" required {...register("startDate")} />
                 <br />
-                <br />
                 <legend>End Date : </legend>
                 <input type="date" required {...register("endDate")} />
-                <br />
                 <br />
                 
                 <legend>Description : </legend>
                 <input type="text" {...register("description")}/>
                
                 <br />
-                <br />
+
+                <input type="number" {...register("id")}  value={0}/>
+                <input type="number" placeholder="Owning company Id" onChange={(e) => {
+                    const id = e.target.valueAsNumber;
+                    setCompanyId(id);
+                }}/>
 
                 <legend>Image : </legend>
                 <br />
-                <input type="file" {...register("image")}/>
-               
-                <br />
-                <br />
-
-                <input type="number" {...register("id")}  value={0} disabled/>
-              
-
-                <br />
+                <input
+          type="file"
+          onChange={(e) => {
+            const file = e.target.files[0];
+            if (file) {
+              addImage(file).then((imageName) => {
+                setImageName(imageName);
+              });
+            }
+          }}
+        />
                 <button>submit</button>
-            </form>
+                </form>
+                <br />
+            
         </div>
     );
 }

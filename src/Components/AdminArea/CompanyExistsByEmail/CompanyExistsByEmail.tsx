@@ -15,6 +15,7 @@ function CompanyExistsByEmail(): JSX.Element {
           const answer = await adminService.companyExistsByEmail(register);
           setExists(answer);
         } catch (error: any) {
+          alert("Yes!");
           console.log(error);
           alert("No Company by specified Id");
         }

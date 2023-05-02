@@ -58,17 +58,17 @@ function Menu(): JSX.Element {
         )}
         {clientType === ClientType.CUSTOMER && (
             <>
-           <NavLink to={"/api/company/updateCompany"}>Update Company</NavLink>
+           <NavLink to={"/api/Customer/updateCustomerByCustomer"}>Update Customer</NavLink>
             <br />
-            <NavLink to={"/api/company/addCoupon"}>Add Coupon</NavLink>
+            <NavLink to={"/api/Customer/findCouponByCatagory"}>Get Coupons By catagory</NavLink>
             <br />
-            <NavLink to={"/api/Customer/allCoupons"}>All Coupon</NavLink>
+            <NavLink to={"/api/Customer/allCouponsByCustomer"}>All Coupon</NavLink>
             <br />
-            <NavLink to={"/api/company/deleteCoupon"}>Delete Coupon</NavLink>
+            <NavLink to={"/api/Customer/AllMyCouponsByCustomer"}>My Coupons</NavLink>
             <br />
-            <NavLink to={"/api/company/allMyCoupons"}>My Coupons</NavLink>
+            <NavLink to={"/api/Customer/addPurchesByCustomer"}>Add Purches</NavLink>
             <br />
-            <NavLink to={"/api/company/uploadImage"}>Upload Image</NavLink>
+            <NavLink to={"/api/Customer/deletePurchesByCustomer"}>Delete Purches</NavLink>
           </>
         )}
         {clientType === ClientType.ADMIN && (

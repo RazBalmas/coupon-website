@@ -11,43 +11,44 @@ import CustomerCard from "../../CardsArea/CustomerCard/CustomerCard";
 
 function CustomerById(): JSX.Element {
      
-    let register : number;
-    const [customer, setCustomer] = useState<CustomerUserModel | undefined>(null);
-    
-
-    async function customerById(){
-        try{
-            const answer = await adminService.customerById(register);
-            setCustomer(answer);
-        }
-        catch (error : any){
-            console.log(error);
-            alert("Failed to retrieve data from server")
-        }
+  const [customer, setCustomer] = useState<CustomerUserModel | undefined>(undefined);
+  const [register, setRegister] = useState<number>(0);
+  
+  
+  const handleCheckClick = async () => {
+    try {
+      console.log(register);
+      const answer = await adminService.customerById(register);
+      setCustomer(answer);
+    } catch (error: any) {
+      console.log(error);
+      alert("No Customer by specified Id");
     }
+  };
+
 
     
     return (
         <div className="CustomerById">
-            <legend>Id :</legend>
-            <br />
-            <input type="number" value={register}/>
-            <button type="submit" onClick={customerById} >Check</button>
-              
-            {customer !== null ? (
-              <div>
-                {
-                <CustomerCard key={customer.id} customer={customer}/>
-                }
-                {/* {coupon.title !== undefined && (
-                  <p>Coupon Title: {coupon.title}</p>
-                )} */}
+           
+      <legend>Id :</legend>
+      <br />
+      <input
+        type="number"
+        value={register}
+        onChange={(e) => setRegister(Number(e.target.value))}
+      />
+       <button onClick={handleCheckClick}>Check</button>
 
-              </div>
-            ) : (
-              <p>No coupon data to display</p>
-            )}
-        </div>
+  
+    {customer !== undefined ? (
+      <div>
+        <CustomerCard key={customer.id} customer={customer} />
+      </div>
+    ) : (
+      <p>No company data to display</p>
+    )}
+  </div>
             
     );
 }

@@ -14,7 +14,8 @@ export enum CompanyActionType {
     UpdateCompany,
     getCompany,
     deleteCompany,
-    companyExists
+    companyExists,
+    uploadImage
 }
 
 export interface CompanyAction {
@@ -55,13 +56,20 @@ export function findCompanyExists(
 
 ) : CompanyAction {
 
-    return {type : CompanyActionType.companyExists , payload : Boolean };
+    return {type : CompanyActionType.companyExists , payload : id };
+}
+export function postUploadImage(
+    file : File
+
+) : CompanyAction {
+
+    return {type : CompanyActionType.companyExists , payload : file};
 }
 
-export const setAuthHeader = (token : string) => {
+export const setAuthHeader = (token: string, isFormData: boolean = false) => {
     const headers = {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+      'Content-Type': isFormData ? 'multipart/form-data' : 'application/json',
     };
     return { headers };
   };
@@ -83,6 +91,11 @@ export function companyReducer (currentState : CompanyState = new CompanyState()
                 case CompanyActionType.deleteCompany :
                     const indexToDelete = newState.users = action.payload.delete()
                     if (indexToDelete >= 0) newState.users.splice(indexToDelete, 1);
+                break;
+            
+                case CompanyActionType.uploadImage :
+                    newState.users.push(action.payload);
+                   
                 break;
             
             

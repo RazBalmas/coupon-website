@@ -7,18 +7,27 @@ import Catagory from "../../../Models/CouponCatagory";
 import customerService from "../../../Service/CustomerService";
 import CompanyUserModel from "../../../Models/CompanyUserModel";
 import { useState } from "react";
+import adminService from "../../../Service/AdminService";
 
-function UpdateCoupon(currentCoupon : CouponModel): JSX.Element {
+function UpdateCoupon(): JSX.Element {
     
-    let authState = new AuthState();
-    const userDetails = {
-        company : authState.user
-    }
-   
+    const[currentCoupon, setCurrentCoupon] = useState<CouponModel>(undefined);
+
+    interface UpdateCouponProps {
+        currentCoupon: CouponModel;
+      }
+
     const {register, handleSubmit} = useForm <CouponModel>();
     
-    
+    async function getCoupon(id:number) {
+        
+        const coupon = await adminService.CouponById(id);
+        setCurrentCoupon(coupon);
+    }
 
+ 
+
+    
 
     async function send(credentials: CouponModel) {
          try {
@@ -34,6 +43,15 @@ function UpdateCoupon(currentCoupon : CouponModel): JSX.Element {
     
     return (
         <div className="UpdateCoupon">
+
+            <span>Coupon To Update Id :</span>
+
+                <input type="number" onChange={(e) => {
+                    const id = parseInt(e.target.value);
+                    getCoupon(id);
+                }}/>
+
+                    {currentCoupon !== undefined &&
         			<form onSubmit={handleSubmit(send)}>
 
 <legend>Title : </legend>
@@ -44,7 +62,7 @@ function UpdateCoupon(currentCoupon : CouponModel): JSX.Element {
     <select className="Catagory-Input" defaultValue={currentCoupon.catagory} size={1} required {...register("catagory")}>
         <option disabled value="">Select Category :</option>
         <option value={Catagory.APLLIENCES}>Appliances</option>
-        <option value={ Catagory.AUTOMOBILE}>Automobile</option>
+        <option value={Catagory.AUTOMOBILE}>Automobile</option>
         <option value={Catagory.ELECTRICITY}>Electricity</option>
         <option value={Catagory.FOOD}>Food</option>
         <option value={Catagory.GARDENING}>Gardening</option>
@@ -65,11 +83,11 @@ function UpdateCoupon(currentCoupon : CouponModel): JSX.Element {
 <br />
 <br />
 <legend>Start Date : </legend>
-<input type="date" required {...register("startDate")} defaultValue={currentCoupon.startDate.getDate()}/>
+<input type="date" required {...register("startDate")} defaultValue={currentCoupon.startDate.toString()}/>
 <br />
 <br />
 <legend>End Date : </legend>
-<input type="date" required {...register("endDate")} defaultValue={currentCoupon.endDate.getDate()} />
+<input type="date" required {...register("endDate")} defaultValue={currentCoupon.endDate.toString()} />
 <br />
 <br />
 
@@ -92,6 +110,7 @@ function UpdateCoupon(currentCoupon : CouponModel): JSX.Element {
 <br />
 <button>submit</button>
 </form>
+}
 </div>
     );
 }
