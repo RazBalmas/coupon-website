@@ -6,9 +6,9 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 
 import Register from "../../AuthArea/AuthMenu/Register/Register";
 
-import AddCoupon from "../../CompanyArea/AddCoupon/AddCoupon";
+
 import UpdateCoupon from "../../CompanyArea/UpdateCoupon/UpdateCoupon";
-import DeleteCoupon from "../../CompanyArea/DeleteCoupon/DeleteCoupon";
+import DeleteCoupon from "../../AdminArea/DeleteCoupon/DeleteCoupon";
 import AllCompanyCoupons from "../../CompanyArea/AllCompanyCoupons/AllCompanyCoupons";
 import UploadImage from "../../CompanyArea/UploadImage/UploadImage";
 import UpdateCustomer from "../../AdminArea/UpdateCustomer/UpdateCustomer";
@@ -42,7 +42,7 @@ import CouponsMenu from "../Menu/CouponsMenu/CouponsMenu";
 import CompaniesMenu from "../Menu/CompaniesMenu/CompaniesMenu";
 import AllCustomers from "../../AdminArea/AllCustomers/AllCustomers";
 import CustomersMenu from "../Menu/CustomersMenu/CustomersMenu";
-import UpdateCompany from "../../CompanyArea/UpdateCompany/UpdateCompany";
+
 import CouponModel from "../../../Models/CouponModel";
 import UpdateCustomerByCustomer from "../../CustomerArea/UpdateCustomerByCustomer/UpdateCustomerByCustomer";
 import AddPurchesByCustomer from "../../CustomerArea/AddPurchesByCustomer/AddPurchesByCustomer";
@@ -50,6 +50,11 @@ import DeletePurchesByCustomer from "../../CustomerArea/DeletePurchesByCustomer/
 import AllCoupons from "../../AdminArea/AllCoupons/AllCoupons";
 import AllCouponsByCustomer from "../../CustomerArea/AllCouponsByCustomer/AllCouponsByCustomer";
 import AllMyCouponsByCustomer from "../../CustomerArea/AllMyCouponsByCustomer/AllMyCouponsByCustomer";
+import AddCouponByCompany from "../../CompanyArea/AddCouponByCompany/AddCouponByCompany";
+import UpdateCompanyByCompany from "../../CompanyArea/UpdateCompanyByCompany/UpdateCompanyByCompany";
+import DeleteCouponByCompany from "../../CompanyArea/DeleteCouponByCompany/DeleteCouponByCompany";
+import UpdateCompany from "../../AdminArea/UpdateCompany/UpdateCompany";
+import AddCoupon from "../../AdminArea/AddCoupon/AddCoupon";
 
 
 
@@ -71,9 +76,9 @@ function Routing(): JSX.Element {
         <Route path="*" element={<PageNotFound />} />
         
         {/* Company Methods Routs */}
-        <Route path="/api/company/UpdateCompany" element={<UpdateCompany/>} />
-        <Route path="/api/company/addCoupon" element={<AddCoupon/>} />
-        <Route path="/api/admin/updateCoupon" element={<UpdateCoupon />} />
+        <Route path="/api/company/UpdateCompanyByCompany" element={<UpdateCompanyByCompany/>} />
+        <Route path="/api/company/AddCouponByCompany" element={<AddCouponByCompany/>} />
+        <Route path="/api/company/DeleteCouponByCompany" element={<DeleteCouponByCompany />} />
        
         <Route path="/api/company/deleteCoupon" element={<DeleteCoupon/>} />
         <Route path="/api/company/allMyCoupons" element={<AllCompanyCoupons/>} />
@@ -94,6 +99,7 @@ function Routing(): JSX.Element {
 
         {/* Admin Methods Routs */}
         
+       
         <Route path="/api/Customer/allCoupons" element={<AllCoupons/>} />
         <Route path="/api/admin/customersMenu" element={<CustomersMenu />} />
         <Route path="/api/admin/couponsMenu" element={<CouponsMenu />} />

@@ -8,7 +8,7 @@ class CompanyUserModel extends UserModel{
     public password: string;
     
 
-	public constructor (clientType: ClientType, id: number, password:string, email: string, name: string){
+	public constructor (clientType: ClientType, id: number, email: string, password:string, name: string){
         super (clientType, id, email,password, name);
       
        

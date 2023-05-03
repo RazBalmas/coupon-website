@@ -1,58 +1,70 @@
-import "./AddCoupon.css";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import ClientType from "../../../Models/ClientType";
-import CredentialsModel from "../../../Models/CredentialsModel";
-import authService from "../../../Service/AuthService";
 import CompanyUserModel from "../../../Models/CompanyUserModel";
-import { getValue } from "@testing-library/user-event/dist/utils";
-import adminService from "../../../Service/AdminService";
-import CouponModel from "../../../Models/CouponModel";
 import Catagory from "../../../Models/CouponCatagory";
+import CouponModel from "../../../Models/CouponModel";
+import UserModel from "../../../Models/UserModel";
+import { authStore } from "../../../Redux/AuthState";
 import companyService from "../../../Service/CompanyService";
-import UploadImage from "../UploadImage/UploadImage";
+import "./AddCouponByCompany.css";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
-function AddCoupon(): JSX.Element {
+function AddCouponByCompany(): JSX.Element {
     const {register, handleSubmit} = useForm <CouponModel>(undefined);
+    const [cuurrentCompany, setCurrentCompany] = useState <UserModel>(undefined);
     
    
  
 
-    async function send(credentials: CouponModel) {
-         try {
-             console.log(credentials);
-             
-             if(imageName) {
-                credentials.image = imageName;
-             }
-             if(companyId) {
-               const company = await adminService.getCompanyById(companyId);
-               credentials.company = company;
-               await adminService.addCoupon(credentials);
-               alert("Success!")
-            
+    useEffect(() => {
+        async function getCurrentCompany() {
+            setCurrentCompany(authStore.getState().user);
 
+            authStore.subscribe(()=> {
+                setCurrentCompany(authStore.getState().user);
+                });
+    
+                
+                
             }
-        }   
+            getCurrentCompany();
+        })
  
-          catch (err: any) {
-             alert("Failed!")
-         }
-    } 
+       
+    async function send(credentials: CouponModel) {
+        try {
+            console.log(credentials);
+            
+            if(imageName) {
+               credentials.image = imageName;
+            }
+            credentials.company=cuurrentCompany as CompanyUserModel;
+            await companyService.addCoupon(credentials);
+              alert("Success!")
+           
+
+           }
+          
+
+         catch (err: any) {
+            alert("Failed!")
+        }
+   } 
+
+ 
 
     
         const [imageName, setImageName] = useState <string>("");
-        const [companyId, setCompanyId] = useState <number>(0);
+       
 
         async function addImage(file : File) : Promise<string> {
              try {
                 console.log(file.name);
-                 const imageName = await adminService.uploadImage(file);
+                 const imageName = await companyService.uploadImage(file);
                  alert("Image was uploaded!")
                  
      
                  setImageName(imageName);
+                 alert("Successfully uploaded Image!!")
              } catch (err: any) {
                  alert("Failed!")
                  return "";
@@ -102,12 +114,7 @@ function AddCoupon(): JSX.Element {
                 <input type="text" {...register("description")}/>
                
                 <br />
-
-                <input type="number" {...register("id")}  value={0}/>
-                <input type="number" placeholder="Owning company Id" onChange={(e) => {
-                    const id = e.target.valueAsNumber;
-                    setCompanyId(id);
-                }}/>
+              
 
                 <legend>Image : </legend>
                 <br />
@@ -130,4 +137,4 @@ function AddCoupon(): JSX.Element {
     );
 }
 
-export default AddCoupon;
+export default AddCouponByCompany;

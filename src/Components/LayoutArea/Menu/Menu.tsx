@@ -43,11 +43,11 @@ function Menu(): JSX.Element {
             <>
            
             
-            <NavLink to={"/api/company/UpdateCompany"}>Update Company</NavLink>
+            <NavLink to={"/api/company/UpdateCompanyByCompany"}>Update Company</NavLink>
             <br />
-            <NavLink to={"/api/company/addCoupon"}>Add Coupon</NavLink>
+            <NavLink to={"/api/company/AddCouponByCompany"}>Add Coupon</NavLink>
             <br />
-            <NavLink to={"/api/company/deleteCoupon"}>Delete Coupon</NavLink>
+            <NavLink to={"/api/company/DeleteCouponByCompany"}>Delete Coupon</NavLink>
             <br />
             <NavLink to={"/api/company/allMyCoupons"}>My Coupons</NavLink>
             <br />
@@ -57,7 +57,7 @@ function Menu(): JSX.Element {
           </>
         )}
         {clientType === ClientType.CUSTOMER && (
-            <>
+          <>
            <NavLink to={"/api/Customer/updateCustomerByCustomer"}>Update Customer</NavLink>
             <br />
             <NavLink to={"/api/Customer/findCouponByCatagory"}>Get Coupons By catagory</NavLink>
@@ -84,6 +84,8 @@ function Menu(): JSX.Element {
             <NavLink to={"/api/admin/addCompany"}>Add a Company</NavLink>
             <br />
             <NavLink to={"/api/admin/updateCompany"}>Update Company</NavLink>
+            <br />
+          <NavLink to={"/api/company/deleteCoupon"}>Delete Coupon</NavLink>
             <br />
             <NavLink to={"/api/admin/deleteCompany"}>Delete Company</NavLink>
             <br />

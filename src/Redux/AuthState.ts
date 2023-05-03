@@ -75,11 +75,11 @@ function extractUser(token: string): UserModel {
         user = new CustomerUserModel(container.clientType, container.sub, container.email, container.password,container.firstName, container.lastName);
     }
     else if(container.ClientType=== ClientType.COMPANY){
-       user = new CompanyUserModel(container.clientType, container.sub, container.password, container.email, container.name);
+       user = new CompanyUserModel(container.clientType, container.sub, container.email, container.password, container.name);
        
     }
     else {
-       user = new AdminUserModel(container.clientType, container.sub, container.password, container.email);
+       user = new AdminUserModel(container.clientType, container.sub, container.email, container.password);
         
     }
 

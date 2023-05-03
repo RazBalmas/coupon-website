@@ -8,27 +8,26 @@ class CompanyService {
     
     public async updateCompany(company : CompanyUserModel){
         
-        await axios.put<void>(appConfig.companyServiceUrl + "updateCompany/" + company);
+        await axios.put<void>(appConfig.companyServiceUrl + "updateCompany" , company);
         
     }
     
-    public async addCoupon(coupon : CouponModel) : Promise<number> {
+    public async addCoupon(coupon : CouponModel) {
         
-        const response = await axios.post<number>(appConfig.companyServiceUrl + "addCoupon/" + coupon);
-        const id = response.data;
-        return id;
+        await axios.post<void>(appConfig.companyServiceUrl + "addCoupon" , coupon);
+        
     }
     
     
     public async updateCoupon(coupon : CouponModel){
         
-        await axios.put<void>(appConfig.companyServiceUrl + "updateCoupon/" + coupon);
+        await axios.put<void>(appConfig.companyServiceUrl + "updateCoupon" , coupon);
         
     }
     
     public async deleteCoupon(id : number){
         
-        await axios.delete<void>(appConfig.companyServiceUrl + "deleteCoupon/" + id);
+        await axios.delete<void>(appConfig.companyServiceUrl + "deleteCoupon?coupon_id=" + id);
         
     }
     

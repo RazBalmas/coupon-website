@@ -27,7 +27,7 @@ function UpdateCompany(): JSX.Element {
     async function send(credentials: CompanyUserModel) {
         try {
 
-            await companyService.updateCompany(credentials);
+            await adminService.updateCompany(credentials);
             alert("Success!")
             
 
@@ -49,7 +49,7 @@ function UpdateCompany(): JSX.Element {
 				<form onSubmit={handleSubmit(send)}>
 
             <legend>Name : </legend>
-            <input type="text"  {...register("name")} placeholder={currentCompany.name}/>
+            <input type="text"  {...register("name")} defaultValue={currentCompany.name} placeholder={currentCompany.name}/>
                 
             <br />
             <legend>ClientType : </legend>
@@ -59,12 +59,12 @@ function UpdateCompany(): JSX.Element {
             <br />
 
             <legend>Email : </legend>
-            <input type="Email Input" required {...register("email")} placeholder={currentCompany.email}/>
+            <input type="Email Input" required {...register("email")} defaultValue={currentCompany.email} placeholder={currentCompany.email}/>
             <br />
             <br />
 
             <legend>Password : </legend>
-            <input type="Password Input" required {...register("password")} placeholder={currentCompany.password}/>
+            <input type="Password Input" required {...register("password")} defaultValue={currentCompany.password} placeholder={currentCompany.password}/>
             <br />
             <br />
             <input type="number" {...register("id")}  value={currentCompany.id} disabled/>
